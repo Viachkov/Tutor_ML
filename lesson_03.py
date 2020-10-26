@@ -41,7 +41,5 @@ def main():
     print('Weights: ' + str(weights) + ' Weights_delta: ' + str(weights_delta))
 
 
-
-
 if __name__ == "__main__":
     main()

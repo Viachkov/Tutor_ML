@@ -1,32 +1,12 @@
-weight = 0.5
-lr = 0.01
+weight, goal_pred, income = (0.0, 0.8, 1.1) 
 
-toes_of_game = [0.5]
-win_or_lost = [1]
-income = toes_of_game[0]
-true = win_or_lost[0]
+for iteration in range(4):
+    prediction  = income * weight
+    error = (prediction - goal_pred)**2
+    delta = prediction - goal_pred
+    weight_delta = delta * income
+    weight -= weight_delta
 
-def neural_network(income, weight):
-    pred = income * weight
-    return pred
-
-prediction  = neural_network(income, weight)
-error = (true - prediction)**2
-
-print(error)
-
-prediction_up = neural_network(income, weight) + lr
-error_up = (true - prediction_up)**2
-print(error_up)
-
-prediction_down = neural_network(income, weight) - lr
-error_down = (true - prediction_down)**2
-print(error_down)
-
-if error > error_up or error > error_down:
-    if error_up > error_down:
-        weight += lr
-        print(weight)
-    else:
-        weight -= lr
-        print(weight)
+    print('Error: ' + str(error) + ' Prediction: ' + str(prediction))
+    print('Weight: ' + str(weight))
+    print('Delta: ' + str(delta) + ' Weight_delta: ' + str(weight_delta))

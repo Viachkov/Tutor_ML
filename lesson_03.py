@@ -12,6 +12,19 @@ def main():
         pred = w_sum(income, weights)
         return pred
 
+    toes = []
+    wlrec = []
+    nfans = []
+
+    win_or_lose = []
+    true = win_or_lose
+    income = [toes[0], wlrec[0], nfans[0]]
+
+
+    prediction = neural_network(income, weights)
+    error = (prediction - true)**2
+    delta = prediction - true
+
 
 
 

@@ -9,7 +9,6 @@ def main():
     def mult_elem(number, vector):
         output = [0, 0, 0]
         assert len(vector) == len(output)
-        output = [0, 0, 0]
         for i in range(len(vector)):
             output[i] = number * vector[i]
         return output

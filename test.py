@@ -1,12 +1,33 @@
-weight, goal_pred, income = (0.0, 0.8, 1.1) 
+def w_sum(a, b):
+    assert len(a) == len(b)
+    output = 0
+    for i in range(len(a)):
+        output += a[i] * b[i]
+    return output
 
-for iteration in range(4):
-    prediction  = income * weight
-    error = (prediction - goal_pred)**2
-    delta = prediction - goal_pred
-    weight_delta = delta * income
-    weight -= weight_delta
 
-    print('Error: ' + str(error) + ' Prediction: ' + str(prediction))
-    print('Weight: ' + str(weight))
-    print('Delta: ' + str(delta) + ' Weight_delta: ' + str(weight_delta))
+def neural_network(income, while):
+    pred = w_sum(income, weights)
+    return pred
+
+
+def mult_sum(number, vector):
+    output = [0, 0, 0]
+    assert len(output) == len(vector)
+    for i in range(len(vector)):
+        output[i] = number * vector[i]
+    return output
+    
+
+income = [] # some data for check
+weights = [] # some coefficients for income
+pred_goal = 0 # target for predict
+alpha = 0.01 # coefficient for corregulate of weights
+
+prediction = neural_network(income, weights)
+error = (prediction - pred_goal)**2
+delta = prediction - pred_goal
+delta_waights = mult_sum(delta, income)
+
+for i in range(len(weights)):
+    weights[i] -= alpha * delta_waights[i]

@@ -23,6 +23,7 @@ weights = [0.1, 0.2, -0.1]
 alpha = 0.01
 goal_prediction = win_or_lose_binary[0]
 prediction = neural_network(income, weights)
+
 for i in range(3):
     prediction = neural_network(income, weights)
 

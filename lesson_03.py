@@ -32,7 +32,7 @@ def main():
         error[i] = (prediction[i] - goal_pred[i])**2
         delta[i] = prediction[i] - goal_pred[i]
 
-    weight_deltas = scalar_ele_mul(income, weights)
+    weight_deltas = scalar_ele_mul(income, delta)
     alpha = 0.01
 
     for i in range(len(weights)):

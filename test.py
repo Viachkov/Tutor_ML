@@ -30,6 +30,7 @@ for i in range(3):
     error = (prediction - goal_prediction)**2
     delta = prediction - goal_prediction
     weights_delta = mult_ele(delta, income)
+    # weights_delta[0] = 0
 
     print('Iterator: ' + str(i + 1))
     print('Prediction: ' + str(prediction))

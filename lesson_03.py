@@ -19,6 +19,7 @@ def main():
             output[i] = w_sum(vector, matrix[i])
         return output
 
+
     def neural_network(income, weights):
         pred = vect_mat_mult(income, weights)
         return pred

@@ -5,14 +5,18 @@ def main():
     income = 2 
     alpha = 0.1
 
+
     def neural_network(income, weight):
         pred = income * weight
         return pred
+
+
     for i in range(20):
         prediction = income * weight
         error = (prediction - goal_pred)**2
         derivate = (prediction - goal_pred) * income
         weight -= derivate * alpha
+
 
     number_of_toes = [0.5]
     win_or_lose_binary = [1]
@@ -24,6 +28,7 @@ def main():
     delta = prediction - goal_pred
     weight_delta = delta * income
     weight -= weight_delta * alpha
+
     print('Error: ' + str(error) + ' Prediction: ' + str(prediction))
 
 

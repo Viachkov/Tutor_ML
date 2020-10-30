@@ -1,4 +1,4 @@
-    def main():
+def main():
     weight = 0.5
     alpha = 0.01    # speed of learning
     goal_pred = 0.8
@@ -24,8 +24,7 @@
     delta = prediction - goal_pred
     weight_delta = delta * income
     weight -= weight_delta * alpha
-        print('Error: ' + str(error) + ' Prediction: ' + str(prediction))
-
+    print('Error: ' + str(error) + ' Prediction: ' + str(prediction))
 
 
 if __name__ == "__main__":

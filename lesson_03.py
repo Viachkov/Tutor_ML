@@ -50,8 +50,6 @@ def main():
     
     def other_prod(vec_a, vec_b):
         out = zero_matrix(len(a), len(b))
-
-
         for i in range(len(a)):
             for j in range(len(b)):
                 out[i][j] = a[i] * b[j]

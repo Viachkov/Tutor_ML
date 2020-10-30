@@ -1,46 +1,68 @@
 def main():
 
-    weights = [0.3, 0.2, 0.9]
+    weights = [[0.1, 0.1, -0.3],
+                [0.1, 0.2, 0.0],
+                [0.0, 1.3, 0.1]]
+    
+    def w_sum(a, b):
+        assert len(a) == len(b)
+        out = 0
+        for i in range(len(a)):
+            out += a[i] * b[i]
+        return out
 
-    def neural_network(income, weights):
-        pred = scalar_ele_mul(income, weights)
-        return pred
 
-
-    def scalar_ele_mul(number, vector):
+    def vect_mat_mult(vector, matrix):
         output = [0, 0, 0]
-        assert len(output) == len(vector)
+        assert len(vector) == len(matrix)
         for i in range(len(vector)):
-            output[i] = number * vector[i]
+            output[i] = w_sum(vector, matrix[i])
         return output
 
+    def neural_network(income, weights):
+        pred = vect_mat_mult(income, weights)
+        return pred
+    
+    toes = [8.5, 9.5, 9.9, 9.0]
+    wlrec = [0.65, 0.8, 0.8, 0.9]
+    nfans = [1.2, 1.3, 0.5, 1.0]
 
-    wlrec = [0.65, 1.0, 1.0, 0.9]
     hurt = [0.1, 0.0, 0.0, 0.1]
     win = [1, 1, 0, 1]
     sad = [0.1, 0.0, 0.1, 0.2]
 
-    income = wlrec[0]
-    goal_pred = [hurt[0], win[0], sad[0]]
+    alpha = 0.01
+
+    income = [toes[0], wlrec[0], nfans[0]]
+    goal_prediction = [hurt[0], win[0], sad[0]]
 
     prediction = neural_network(income, weights)
 
     error = [0, 0, 0]
     delta = [0, 0, 0]
 
-    for i in range(len(goal_pred)):
-        error[i] = (prediction[i] - goal_pred[i])**2
-        delta[i] = prediction[i] - goal_pred[i]
+    for i range(len(goal_prediction)):
+        error[i] = (prediction[i] - goal_prediction[i]**2)
+        delta = prediction[i] - goal_prediction[i]
 
-    weight_deltas = scalar_ele_mul(income, delta) # error in book weight_deltas = scalar_ele_mul(income, weights)
-    alpha = 0.01
+    
+    def other_prod(vec_a, vec_b):
+        out = zero_matrix(len(a), len(b))
 
-    for i in range(len(weights)):
-        weights[i] -= weight_deltas[i] * alpha
+        for i in range(len(a)):
+            for j in range(len(b)):
+                out[i][j] = a[i] * b[j]
+        return out
 
-    print('Weights: ' + str(weights))
-    print('Weight-delta: ' + str(weight_deltas))
+    
+    income = [toes[0], wlrec[0], nfans[0]]
+    goal_prediction = [hurt[0], win[0], sad[0]]
 
+    for i in range(len(goal_prediction)):
+        error[i] = (prediction[i] - goal_prediction[i])**2
+        delta[i] = prediction[i] - goal_prediction[i]
+
+    weight_deltas = other_prod(income, delta)
 
 
 if __name__ == "__main__":

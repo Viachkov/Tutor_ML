@@ -1,42 +1,46 @@
 def neural_network(income, weights):
-    assert len(income) == len(weights)
+    pred = vect_matrix_mult(income, weghts)
+    return pred
+
+
+def vect_mutrix_mult(income, weights):
+    output = [0] * len(income)
+    assert len(income) == len(output)
+    for i in range(len(output)):
+        output[i] = w_sum(income, weights[i])
+    retutn output
+
+
+def w_sum(a, b):
+    assert len(a) == len(b)
     out = 0
-    for i in range(len(income)):
-        out += income[i] * weights[i]
+    for i in range(len(a)):
+        out += a[i] * b[i]
+    return out
+
+weights = [[0.5, 0.3, 0.1], [1.1, 0.9, 0.9], [0.65, 0.8, 0.9]]
+income = [a[0], b[0], c[0]]
+goal_pred = [d[0], e[0], f[0]]
+alpha = 0.01
+error = [0, 0, 0]
+delta = [0, 0, 0]
+prediction = neural_network(income, weights)
+
+for i in range(len(goal_pred)):
+    error[i] = (prediction[i]  - goal_predred[i])**2
+    delta[i] = prediction[i] - goal_pred[i]
+
+def othe_pred(vec_a, vec_b):
+    out = zero_matrix(len(a), len(b))
+    for i in range(len(a)):
+        for j in range(len(b)):
+            out[i][j] = a[i] * b[j]
     return out
 
 
-def mult_ele(scalar, vector):
-    output = [0, 0, 0]
-    assert len(output) == len(vector)
-    for i in range(len(output)):
-        output[i] = scalar * vector[i]
-    return output
+for i in range(len(goal_pred)):
+    error[i] = (prediction[i] - goal_pred[i])**2
+    delta[i] = prediction[i] - goal_pred[i]
 
-toes = [8.5, 9.5, 9.9, 9.0]
-wlerc = [0.65, 0.8, 0.8, 0.9]
-nfans = [1.2, 1.3, 0.5, 1.0]
 
-income = [toes[0], wlerc[0], nfans[0]]
-win_or_lose_binary = [1, 1, 0, 1]
-weights = [0.1, 0.2, -0.1]
-alpha = 0.01
-goal_prediction = win_or_lose_binary[0]
-prediction = neural_network(income, weights)
-
-for i in range(3):
-    prediction = neural_network(income, weights)
-
-    error = (prediction - goal_prediction)**2
-    delta = prediction - goal_prediction
-    weights_delta = mult_ele(delta, income)
-    # weights_delta[0] = 0
-
-    print('Iterator: ' + str(i + 1))
-    print('Prediction: ' + str(prediction))
-    print('Delta: ' + str(delta))
-    print('Weights: ' + str(weights))
-    print('Weights Delta: ' + str(weights_delta))
-
-    for i in range(len(weights)):
-        weights[i] = alpha * weights_delta[i]
+weight_deltas = othe_pred(income, delta)

@@ -44,8 +44,8 @@ def main():
     delta = [0, 0, 0]
 
     for i range(len(goal_prediction)):
-        error[i] = (prediction[i] - goal_prediction[i]**2)
-        delta = prediction[i] - goal_prediction[i]
+        error[i] = (prediction[i] - goal_prediction[i])**2
+        delta[i] = prediction[i] - goal_prediction[i]
 
     
     def other_prod(vec_a, vec_b):
@@ -61,9 +61,21 @@ def main():
 
     for i in range(len(goal_prediction)):
         error[i] = (prediction[i] - goal_prediction[i])**2
-        delta = prediction[i] - goal_prediction[i]
+        delta[i] = prediction[i] - goal_prediction[i]
 
     weight_deltas = other_prod(income, delta)
+
+    def num_matx_mult(num, matrix):     #TODO
+        out = zero_matrix(len(matrix[i], len(matrix[j])))
+        for i in range(len(out)):
+            for j in range(len(martix)):
+                out[i][j] = matrix[i][j] * number
+        return out
+
+    alpha_weight_deltas = num_matx_mult(alpha, weight_deltas)
+
+    for i in range(len(weights)):
+        weights[i] -= alpha_weight_deltas[i]
 
 
 if __name__ == "__main__":

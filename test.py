@@ -1,23 +1,12 @@
-import numpy as np
+def relu(x):
+    return (x > 0) * x
 
-weights = np.array([])
-alpha = 0.1
 
-streetlights = np.array([[],])
-walk_vs_stop = np.array([])
+num_pos  = relu(2)
+num_neg = relu(-2)
+num_zero = relu(0)
 
-income = streetlights[0]
-goal_predict = walk_vs_stop[0]
+print(num_pos)
+print(num_neg)
+print(num_zero)
 
-for iter in range(40):
-    error_all_lights = 0
-    for raw_index in range(len(walk_vs_stop)):
-        income = streetlights[raw_index]
-        goal_predict = walk_vs_stop[raw_index]
-        prediction = income.dot(weights)
-        error = (prediction - goal_predict)**2
-        error_all_lights += error
-        delta = prediction - goal_predict
-        weights -= alpha * (income * delta)
-        print('Prediction ', prediction)
-    print('Errors of all lights: ', error_all_lights)

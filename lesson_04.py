@@ -1,35 +1,34 @@
 import numpy as np
 
 def main():
-    weights = np.array([0.5, 0.48, -0.7])
-    alpha = 0.1
+    np.random.seed(1)
+
+    def relu(x):
+        """ change negative figures into zero"""
+        return (x > 0) * x
+
+    alpha = 0.2
+    hidden_size = 4
 
     streetlights = np.array([[1, 0, 1],
                             [0, 1, 1],
                             [0, 0, 1],
-                            [1, 1, 1],
-                            [0, 1, 1],
-                            [1, 0, 1]])
-    
-    walk_or_stop = np.array([0, 1, 0, 1, 1, 0])
+                            [1, 1, 1]])
 
-    income = streetlights[0]
-    goal_predict = walk_or_stop[0]
+    walk_vs_stop = np.array([1, 1, 0, 1]).T
 
-    for iteration in range(40):
-        error_for_all_lights = 0
-        for row_index in range(len(walk_or_stop)):
-            income = streetlights[row_index]
-            goal_predict = walk_or_stop[row_index]
-            prediction = income.dot(weights)
-            error = (prediction - goal_predict)**2
-            error_for_all_lights += error
+    weights_0_1 = 2 * np.random.random((3, hidden_size)) - 1        # Change negative figures into zero
+    weights_0_2 = 2 * np.random.random((hidden_size, 1)) - 1        # Change negative figures into zero
 
-            delta = prediction - goal_predict
-            weights -= (alpha * (income * delta))
-            print('Prediction: ', prediction)
-        print('Error: ', error_for_all_lights)
-        print('Weights: ', weights)
+    layer_0 = streetlights[0]
+    layer_1 = relu(np.dot(layer_0, weights_0_1))
+    layer_2 = np.dot(layer_1, weights_0_2)
+
+    print('Weights_0_1: ', weights_0_1)
+    print('Weights_0_2: ', weights_0_2)
+    print('Layer_0: ', layer_0)
+    print('Leyer_1: ', layer_1)
+    print('Leyer_2: ', layer_2)
 
 
 if __name__ == "__main__":

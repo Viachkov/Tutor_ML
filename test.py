@@ -32,7 +32,7 @@ for iteration in range(60):
         layer_1_delta = layer_2_delta.dot(weight_1_2.T) * relu2deriv(leyer_1)
         
         weight_0_2 += alpha * layer_1.T.dot(layer_2_delta)
-        weight_0_1 += alpha * layer_0.T.cot(layer_1_delta)
+        weight_0_1 += alpha * layer_0.T.dot(layer_1_delta)
 
         if (iteration % 10 == 9):
             print('Error: ' + str(layer_2_error))

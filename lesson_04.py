@@ -3,32 +3,47 @@ import numpy as np
 def main():
     np.random.seed(1)
 
+
     def relu(x):
-        """ change negative figures into zero"""
+        """ return x if x > 0 or return 0"""
         return (x > 0) * x
 
-    alpha = 0.2
-    hidden_size = 4
+
+    def relu2deriv(output):
+        """ return 1 if output >  0 or teturn 0"""
+        return output > 0
+
 
     streetlights = np.array([[1, 0, 1],
                             [0, 1, 1],
                             [0, 0, 1],
                             [1, 1, 1]])
 
-    walk_vs_stop = np.array([1, 1, 0, 1]).T
+    walk_vs_stop = np.array([[1, 1, 0, 0]]).T
 
-    weights_0_1 = 2 * np.random.random((3, hidden_size)) - 1        # Change negative figures into zero
-    weights_0_2 = 2 * np.random.random((hidden_size, 1)) - 1        # Change negative figures into zero
+    alpha = 0.2
+    hidden_size = 4
 
-    layer_0 = streetlights[0]
-    layer_1 = relu(np.dot(layer_0, weights_0_1))
-    layer_2 = np.dot(layer_1, weights_0_2)
+    weights_0_1 = 2 * np.random.random((3, hidden_size)) - 1
+    weights_1_2 = 2 * np.random.random((hidden_size, 1)) - 1
 
-    print('Weights_0_1: ', weights_0_1)
-    print('Weights_0_2: ', weights_0_2)
-    print('Layer_0: ', layer_0)
-    print('Leyer_1: ', layer_1)
-    print('Leyer_2: ', layer_2)
+    for iteration in range(60):
+        layer_2_error = 0
+        for i in range(len(streetlights)):
+            layer_0 = streetlights[i: i + 1]
+            layer_1 = relu(np.dot(layer_0, weights_0_1))
+            layer_2 = np.dot(layer_1, weights_1_2)
+
+            layer_2_error += np.sum((layer_2 - walk_vs_stop[i: i + 1])**2)
+
+            layer_2_delta = (layer_2 - walk_vs_stop[i: i + 1])
+            layer_1_delta = layer_2_delta.dot(weights_1_2.T) * relu2deriv(layer_1)
+
+            weights_1_2 -= alpha * layer_1.T.dot(layer_2_delta)
+            weights_0_1 -= alpha * layer_0.T.dot(layer_1_delta)
+
+        if iteration % 10 == 9:
+            print('Error: ' + str(layer_2_error))
 
 
 if __name__ == "__main__":

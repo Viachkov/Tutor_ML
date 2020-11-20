@@ -13,9 +13,9 @@ for i, l in enumerate(labels):
 labels = one_hot_labels
 
 test_images = x_test.reshape(len(x_test), 28 * 28) /255
-test_lagels = np.zeros((len(y_test), 10))
+test_labels = np.zeros((len(y_test), 10))
 for i, l in enumerate(y_test):
-    test_lagels[i][l] = 1
+    test_labels[i][l] = 1
 
 np.random.seed(1)
 relu = lambda x: x > 0 * x
